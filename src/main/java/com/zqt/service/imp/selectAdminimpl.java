@@ -1,4 +1,4 @@
-package com.zqt.serviceimpl;
+package com.zqt.service.imp;
 
 import com.zqt.dao.adminDao;
 import com.zqt.domain.root.admin;
@@ -12,7 +12,12 @@ public class selectAdminimpl implements selectAdmin {
     private adminDao adminDao;
     @Override
     public int isExit(admin admin) {
-        adminDao.selectUser(admin);
-        return 0;
+       if(adminDao.selectUser(admin)!=null) {
+           return 1;
+       }else{
+
+           return 0;
+       }
+
     }
 }
