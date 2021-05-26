@@ -2,6 +2,8 @@ package com.zqt.controller;
 
 import com.zqt.domain.user.user;
 import com.zqt.service.imp.userRegisterServiceimpl;
+import com.zqt.service.userIsEmptyService;
+import com.zqt.service.userRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
@@ -19,14 +22,20 @@ import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 public class userLoginAndregisterController {
     @Resource
     private userRegisterServiceimpl ursi;
+    @Resource
+    private userIsEmptyService uies;
     @RequestMapping("registerUer")
     public ModelAndView registerUer(user user, String code, HttpServletRequest req){
         ModelAndView mav=new ModelAndView();
         String tips="";
         String attribute = (String)req.getSession().getAttribute(KAPTCHA_SESSION_KEY);
-        if(code.equals(attribute)){
+        if(!code.equals(attribute)){
             //System.out.println(code+attribute);
             tips="验证码错误";
+            mav.addObject("tips",tips);
+            mav.setViewName("forward:/common/register.jsp");
+        }else if (uies.isEmpty(user)){
+            tips="该用户名已经备注过";
             mav.addObject("tips",tips);
             mav.setViewName("forward:/common/register.jsp");
         }else {
@@ -43,6 +52,26 @@ public class userLoginAndregisterController {
         }
         return mav;
     }
-
+    @RequestMapping("loginUsercontroller")
+    public ModelAndView LoginUer(user user , HttpSession Session){
+        ModelAndView mav=new ModelAndView();
+        String tips="";
+        int flag=uies.isAdmin(user);
+        if (flag>=0){
+            tips="登入成功";
+            mav.addObject("tips",tips);
+            Session.setAttribute("userinfo",user);
+            if (flag==1){
+                mav.setViewName("admin/adminCenter");
+            }else if (flag==0){
+                mav.setViewName("user/userCenter");
+            }
+        }else {
+            tips="登入失败";
+            mav.addObject("tips",tips);
+            mav.setViewName("forward:/common/result.jsp");
+        }
+        return mav;
+    }
 }
 

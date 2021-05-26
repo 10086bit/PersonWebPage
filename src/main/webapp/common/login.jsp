@@ -6,24 +6,13 @@
     </script>
     <script type="text/javascript">
      //做刷新和回调函数（未完成）
-    function login(){
-        $.ajax({
-            url:"${pageContext.request.contextPath}/loginadmin",
-            type:"get",
-            dataType:"json",
-            success:function (tips){
-                alert(tips);
-            }
-        })
-    }
-
     </script>
 </head>
 <body>
-<form  method="post">
-    name<input type="text" name="name">
-    age<input type="text" name="passwd">
-    <input type="button" value="提交" onclick="login()">
+<form  method="post" action="${pageContext.request.contextPath}/loginUsercontroller">
+    name<input type="text" name="u_name">
+    age<input type="text" name="u_passwd">
+    <input type="submit" value="提交" >
 </form>
 
 </body>

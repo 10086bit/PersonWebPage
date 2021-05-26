@@ -18,7 +18,7 @@ public class userRegisterServiceimpl implements userRegisterService {
     private userDao userDao;
     @Override
     public boolean userRegister(user user) {
-        System.out.println(user.getU_name()+user.getU_passwd());
+      //  System.out.println(user.getU_name()+user.getU_passwd());
         int result=userDao.insterUser(user);
         if(result==0){
             return false;

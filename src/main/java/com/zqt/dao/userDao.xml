@@ -7,5 +7,10 @@
      insert into user (u_name,u_passwd) values(#{u_name},#{u_passwd})
  </insert>
 
-
+    <select id="searchUserByname" parameterType="user" resultType="user">
+        select * from user where u_name=#{u_name}
+    </select>
+    <select id="searchUserBynameAndpwd" parameterType="user" resultType="user">
+        select * from user where u_name=#{u_name} and u_passwd=#{u_passwd}
+    </select>
 </mapper>
