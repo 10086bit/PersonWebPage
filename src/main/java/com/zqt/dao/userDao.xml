@@ -13,4 +13,19 @@
     <select id="searchUserBynameAndpwd" parameterType="user" resultType="user">
         select * from user where u_name=#{u_name} and u_passwd=#{u_passwd}
     </select>
+    <select id="selectAllUser" resultType="user">
+        select * from user
+    </select>
+    <select id="searchUserById" parameterType="int" resultType="Integer">
+        select isAdmin from user where u_id=#{id}
+    </select>
+    <select id="selectSignalUserById" resultType="user" parameterType="int">
+        select u_name,u_id,u_passwd,u_head from user where u_id=#{u_id}
+    </select>
+    <update id="modifyUser" parameterType="user" >
+        update user set u_name=#{u_name},u_passwd=#{u_passwd} where u_id=#{u_id}
+    </update>
+    <delete id="deleteUser" parameterType="int">
+        delete from user where u_id=#{uid}
+    </delete>
 </mapper>

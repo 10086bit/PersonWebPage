@@ -2,6 +2,7 @@ package com.zqt.controller;
 
 import com.zqt.domain.user.user;
 import com.zqt.service.imp.userRegisterServiceimpl;
+import com.zqt.service.selectUserservice;
 import com.zqt.service.userIsEmptyService;
 import com.zqt.service.userRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class userLoginAndregisterController {
     private userRegisterServiceimpl ursi;
     @Resource
     private userIsEmptyService uies;
+    @Resource
+    private selectUserservice sus;
     @RequestMapping("registerUer")
     public ModelAndView registerUer(user user, String code, HttpServletRequest req){
         ModelAndView mav=new ModelAndView();
@@ -60,7 +63,7 @@ public class userLoginAndregisterController {
         if (flag>=0){
             tips="登入成功";
             mav.addObject("tips",tips);
-            Session.setAttribute("userinfo",user);
+            Session.setAttribute("uid",sus.selectUserByName(user));
             if (flag==1){
                 mav.setViewName("admin/adminCenter");
             }else if (flag==0){
@@ -72,6 +75,11 @@ public class userLoginAndregisterController {
             mav.setViewName("forward:/common/result.jsp");
         }
         return mav;
+    }
+    @RequestMapping("outAdminUser")
+    public String layoutAdminUser(HttpSession session){
+        session.removeAttribute("uid");
+        return "forward:index.jsp";
     }
 }
 

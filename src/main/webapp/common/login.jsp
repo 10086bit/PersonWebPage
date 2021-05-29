@@ -9,6 +9,8 @@
     </script>
 </head>
 <body>
+
+
 <form  method="post" action="${pageContext.request.contextPath}/loginUsercontroller">
     name<input type="text" name="u_name">
     age<input type="text" name="u_passwd">

@@ -24,12 +24,12 @@ public class userIsEmptyServiceimpl implements userIsEmptyService {
     public int isAdmin(user user) {
         int flag=-1;
 
-        System.out.println(userDao.searchUserBynameAndpwd(user));
+     //   System.out.println(userDao.searchUserBynameAndpwd(user));
         if(userDao.searchUserBynameAndpwd(user)!=null) {
            user user1= userDao.searchUserBynameAndpwd(user);
             flag= user1.getIsAdmin();
         }
-        System.out.println(flag);
+      //  System.out.println(flag);
         return  flag;
     }
 }

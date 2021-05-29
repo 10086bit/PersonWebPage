@@ -15,4 +15,10 @@ public class user {
     private  String u_passwd;
     private int u_id;
     private String u_head;
+
+    public user(String u_name, int u_id, String u_head) {
+        this.u_name = u_name;
+        this.u_id = u_id;
+        this.u_head = u_head;
+    }
 }

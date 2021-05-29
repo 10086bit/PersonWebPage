@@ -12,6 +12,7 @@
 </head>
 <body>
 ${tips}
-<%=session.getAttribute("userinfo")%>
+<a href="${pageContext.request.contextPath}/usermanage">用户管理</a>
+<a href="${pageContext.request.contextPath}/outAdminUser">退出登入</a>
 </body>
 </html>

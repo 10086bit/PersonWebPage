@@ -11,7 +11,7 @@
     <title>$Title$</title>
 </head>
 <body>
-<a href="common/login.jsp">登入</a>
-<a href="common/register.jsp">用户注册</a>
+<a href="${pageContext.request.contextPath}/login">登入</a>
+<a href="${pageContext.request.contextPath}/register">用户注册</a>
 </body>
 </html>

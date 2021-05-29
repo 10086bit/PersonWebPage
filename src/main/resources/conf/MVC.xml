@@ -15,4 +15,10 @@
         <property name="prefix" value="/WEB-INF/project01/" />
         <property name="suffix" value=".jsp" />
     </bean>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/login"/>
+            <bean class="com.zqt.interceptor.loginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
