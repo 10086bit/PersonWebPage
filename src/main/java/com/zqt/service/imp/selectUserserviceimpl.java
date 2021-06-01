@@ -1,6 +1,7 @@
 package com.zqt.service.imp;
 
 import com.zqt.dao.userDao;
+import com.zqt.domain.user.Page;
 import com.zqt.domain.user.user;
 import com.zqt.service.selectUserservice;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,12 @@ public class selectUserserviceimpl implements selectUserservice {
     }
 
     @Override
-    public List<user> selectAllUser() {
+    public List<user> selectAllUser(int start,int count) {
         List<user> list=new ArrayList<user>();
-        List<user> lists=userDao.selectAllUser();
-      //  System.out.println(lists);
+       // System.out.println("1");
+       // System.out.println(start+count);
+        List<user> lists=userDao.selectAllUser(start,count);
+      // System.out.println(lists);
         for(user user1:lists){
             user usertrmp=new user(user1.getU_name(),user1.getU_id(),user1.getU_head());
           //  System.out.println("1");
@@ -51,5 +54,10 @@ public class selectUserserviceimpl implements selectUserservice {
             return userDao.searchUserById(id);
         }
 
+    }
+
+    @Override
+    public int getUserTotal() {
+        return userDao.getTotalUser();
     }
 }

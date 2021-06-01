@@ -978,41 +978,66 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <table id="288" parent="11" name="admin"/>
+    <table id="288" parent="11" name="file"/>
     <table id="289" parent="11" name="user"/>
-    <column id="290" parent="288" name="name">
+    <column id="290" parent="288" name="fid">
       <Position>1</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="291" parent="288" name="passwd">
+    <column id="291" parent="288" name="faddress">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
-    <key id="292" parent="288" name="PRIMARY">
+    <column id="292" parent="288" name="uid">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="293" parent="288" name="fattribute">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <index id="294" parent="288" name="fuid">
+      <ColNames>uid</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="295" parent="288" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>name</ColNames>
+      <ColNames>fid</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="293" parent="289" name="u_name">
+    <foreign-key id="296" parent="288" name="fuid">
+      <ColNames>uid</ColNames>
+      <RefTableName>user</RefTableName>
+      <RefColNames>u_id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>set-null</OnDelete>
+    </foreign-key>
+    <column id="297" parent="289" name="u_name">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="294" parent="289" name="u_passwd">
+    <column id="298" parent="289" name="u_passwd">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="295" parent="289" name="u_head">
+    <column id="299" parent="289" name="u_head">
       <Position>3</Position>
-      <DataType>blob|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="296" parent="289" name="u_id">
+    <column id="300" parent="289" name="u_id">
       <Position>4</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <key id="297" parent="289" name="PRIMARY">
+    <column id="301" parent="289" name="isAdmin">
+      <Position>5</Position>
+      <DataType>int|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <key id="302" parent="289" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>u_id</ColNames>
       <Primary>1</Primary>

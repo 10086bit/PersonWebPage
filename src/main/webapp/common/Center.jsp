@@ -13,14 +13,15 @@
     <script type="text/javascript">
         $(function (){
             toUser();
+
         })
         function toUser(){
             $.ajax({
-                url:"${pageContext.request.contextPath}/showOwn",
+                url:"${pageContext.request.contextPath}/showOwnHead",
                 type:"get",
                 dataType:"json",
                 success:function (data){
-                    $("#btn1").append("<p>"+data.u_name+"</p>")
+                    $("#btn2").append("<img src="+data.faddress+" alt='head' width='100' height='100' border-radius:10px;>")
                 }
             })
         }
@@ -35,17 +36,17 @@
 
         function loadData(){
             $.ajax({
-                url:"${pageContext.request.contextPath}/showsignaluser",
+                url:"${pageContext.request.contextPath}/showOwn",
                 type:"get",
                 dataType:"json",
                 success:function (data){
                     /*刷新*/
                     $("#info").html("")
                     $("#info").append("<tr>")
-                             .append("<td>"+data.u_name+"</td>")
-                            .append("<td>"+data.u_id+"</td>")
-                            .append("<td>"+data.u_passwd+"</td>")
-                           .append("<td>"+data.u_head+"</td>")
+                        .append("<td>"+data.u_name+"</td>")
+                        .append("<td>"+data.u_id+"</td>")
+                        .append("<td>"+data.u_passwd+"</td>")
+                        .append("<td>"+data.u_head+"</td>")
                         .append("</tr>")
 
                 }
@@ -55,7 +56,7 @@
 
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/toCenter" id="btn1"></a>
+
 <div align="center">
     <table>
         <thead>
@@ -72,25 +73,26 @@
 
     </table>
 </div>
+<a href="${pageContext.request.contextPath}/toCenter" id="btn2"></a>
 <div align="center" >
 
 
     <form action='${pageContext.request.contextPath}/modUser' method='post'>
-        <input type='hidden' name='uid' value="<%=(int)session.getAttribute("suid")%>">
+        <input type='hidden' name='uid' value="<%=(int)session.getAttribute("uid")%>">
         名字<input type='text' name='u_name'>
 
         密码<input type='text' name='u_passwd'>
-        <input type='submit' value='修改用户信息'>
+        <input type='submit' value='修改信息'>
     </form>
+
 
     ${msg}
     <br>
-    <form action='${pageContext.request.contextPath}/delUser' method='post'>
-        <input type='hidden' name='uid' value="<%=(int)session.getAttribute("suid")%>">
-        <input type='submit' value='删除该用户'>
+    <form method="POST" action="${pageContext.request.contextPath}/toUpHead" enctype="multipart/form-data">
+        上传头像: <input type="file" name="file">
+        <input type="submit" value="Upload">
     </form>
-    ${delmsg}
 </div>
-<a href="${pageContext.request.contextPath}/tologUser" >返回主页</a>
+
 </body>
 </html>

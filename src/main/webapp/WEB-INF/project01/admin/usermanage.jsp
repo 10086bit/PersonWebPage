@@ -12,6 +12,21 @@
     <script type="text/javascript" src="webjars/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
         $(function (){
+            toUser();
+        })
+        function toUser(){
+            $.ajax({
+                url:"${pageContext.request.contextPath}/showOwn",
+                type:"get",
+                dataType:"json",
+                success:function (data){
+                    $("#btn1").append("<p>"+data.u_name+"</p>")
+                }
+            })
+        }
+    </script>
+    <script type="text/javascript">
+        $(function (){
             loadData();
             $("#btn").click(function (){
                 loadData();
@@ -31,7 +46,7 @@
                         $("#info").append("<tr>")
                             .append("<td>"+n.u_id+"<td>")
                             .append("<td>"+n.u_name+"<td>")
-                            .append("<td>"+"<form action='http://localhost:8080/PersonWebPage/toModUser' method='post'>"+
+                            .append("<td>"+"<form action='"+"${pageContext.request.contextPath}"+"/toModUser' method='post'>"+
                                 "<input type='hidden' " +
                                 "name='uid' value='"+n.u_id+"'>"+"<input type='submit' " +
                                 "value='查看用户详细信息'>"+"</form>"+"</td>")
@@ -43,6 +58,7 @@
 
 </head>
 <body>
+<a href="${pageContext.request.contextPath}/toCenter" id="btn1"></a>
 <div align="center">
     <table>
         <thead>
@@ -56,6 +72,16 @@
         <input type="button" id="btn" value="查询用户">
         </tbody>
     </table>
+    <form action="${pageContext.request.contextPath}/pageChange" method="post">
+        <input type="hidden" name="pre" value="-1">
+        <input type="submit" value="上一页" id="btn2">
+    </form>
+
+    <form action="${pageContext.request.contextPath}/pageChange" method="post">
+       <input type="hidden" name="pre" value="1">
+        <input type="submit" value="下一页" id="btn3">
+    </form>
 </div>
+<a href="${pageContext.request.contextPath}/tologUser" >返回主页</a>
 </body>
 </html>

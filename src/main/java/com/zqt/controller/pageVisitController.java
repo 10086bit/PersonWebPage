@@ -3,8 +3,10 @@ package com.zqt.controller;
 import com.zqt.service.selectUserservice;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -21,11 +23,27 @@ public class pageVisitController {
         return "forward:/common/register.jsp";
     }
 
+    @RequestMapping("pageChange")
+    public String pageChange(String pre,HttpSession session){
+       // System.out.println(pre);
+        session.setAttribute("pre",Integer.parseInt(pre));
+
+        return "admin/usermanage";
+    }
+    @RequestMapping("toUpHead")
+    public String upHead(MultipartFile file, HttpServletRequest request){
+        request.setAttribute("fatt","head");
+        request.setAttribute("file",file);
+        return "forward:uploadFile";
+    }
     @RequestMapping("usermanage")
     public String toUserManage(){
         return "admin/usermanage";
     }
-
+    @RequestMapping("toCenter")
+    public String toCenter(){
+        return "forward:/common/Center.jsp";
+    }
     @RequestMapping("toModUser")
     public String toModUser(int uid , HttpSession session){
         session.setAttribute("suid",uid);

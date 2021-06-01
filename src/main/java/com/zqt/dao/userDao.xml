@@ -13,9 +13,13 @@
     <select id="searchUserBynameAndpwd" parameterType="user" resultType="user">
         select * from user where u_name=#{u_name} and u_passwd=#{u_passwd}
     </select>
-    <select id="selectAllUser" resultType="user">
-        select * from user
+    <select id="selectAllUser" resultType="user" >
+        select * from user limit #{start},#{count}
     </select>
+    <select id="getTotalUser" resultType="int">
+        select count(*) from user
+    </select>
+
     <select id="searchUserById" parameterType="int" resultType="Integer">
         select isAdmin from user where u_id=#{id}
     </select>
@@ -28,4 +32,8 @@
     <delete id="deleteUser" parameterType="int">
         delete from user where u_id=#{uid}
     </delete>
+
+    <update id="setHeadId" parameterType="myFile" >
+        update user set u_head=#{fid} where u_id=#{uid}
+    </update>
 </mapper>

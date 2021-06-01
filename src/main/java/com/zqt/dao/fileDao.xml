@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqt.dao.fileDao">
+<insert id="uploadFile" parameterType="myFile">
+    insert into file (faddress,uid,fattribute) values(#{faddress},#{uid},#{fattribute})
+</insert>
+<update id="upDateFile" parameterType="myFile">
+    update file set faddress=#{faddress} where fid=#{fid}
+</update>
+    <select id="selectFileByUidAndFa" parameterType="myFile" resultType="Integer">
+        select fid from  file where uid=#{uid} and fattribute=#{fattribute}
+    </select>
+    <select id="selectHeadFileByFid" parameterType="myFile" resultType="String">
+        select faddress from  file where fid=#{fid}
+    </select>
+</mapper>
