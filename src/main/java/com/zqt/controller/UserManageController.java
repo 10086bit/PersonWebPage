@@ -105,9 +105,10 @@ public class UserManageController {
     }
 
     @RequestMapping("modUser")
-    public ModelAndView modifyUser(int uid,user user ){
+    public ModelAndView modifyUser(int uid,user user,HttpSession session ){
       //  System.out.println(uid);
        //System.out.println(user);
+
         ModelAndView mav=new ModelAndView();
         int flag=ums.modifyUser(uid,user);
         if (flag==0){
@@ -116,7 +117,12 @@ public class UserManageController {
         else {
             mav.addObject("msg","修改成功");
         }
-        mav.setViewName("admin/modifyUser");
+        if (uid!=(int)session.getAttribute("uid")){
+            mav.setViewName("admin/modifyUser");
+        }else{
+            mav.setViewName("common/Center");
+        }
+
         return mav;
     }
     @RequestMapping("delUser")
@@ -124,11 +130,14 @@ public class UserManageController {
         ModelAndView mav=new ModelAndView();
         int flag=-1;
 
-        if ((int)session.getAttribute("suid")==1){
+        if ((int)session.getAttribute("isadmin")==1){
             System.out.println((int)session.getAttribute("suid"));
             mav.addObject("delmsg","你无法删除root成员");
             mav.setViewName("admin/modifyUser");
         }else {
+            //删除用户时将用户的头像数据一并删除
+            String rootPath =session.getServletContext().getRealPath("/upload");
+            fms.deleteHeadFile(uid,rootPath);
            flag =ums.deleUser(uid);
 
             if (flag==0){

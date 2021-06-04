@@ -7,4 +7,5 @@ public interface fileDao {
     public int upDateFile(myFile myFile);
     public int selectFileByUidAndFa(myFile myFile);
     public String selectHeadFileByFid(myFile myFile);
+    public int deletefile(int fid);
 }

@@ -17,7 +17,7 @@ public class selectUserserviceimpl implements selectUserservice {
     @Override
     public int selectUserByName(user user) {
 
-        return userDao.searchUserByname(user).getIsAdmin();
+        return userDao.searchUserByname(user).getU_id();
     }
 
     @Override

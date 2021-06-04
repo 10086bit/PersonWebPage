@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqt.dao.articleDao">
+<insert id="saveArticle" parameterType="article">
+    insert into article  (uid,title,Text,date) values (#{uid},#{title},#{text},#{date})
+</insert>
+    <select id="searchAllArticle" resultMap="artuser" parameterType="int" >
+        select a.Text,a.title,a.date,a.aid,u.u_name
+        from article a,user u
+        where article.uid=#{uid} and user.u_id=#{uid}
+        limit #{start},#{count}
+    </select>
+    <resultMap id="artuser" type="article">
+        <result property="text" column="Text"/>
+        <result property="aid" column="aid"/>
+        <result property="title" column="title"/>
+        <result property="uid" column="uid"/>
+        <result property="date" column="date"/>
+        <association property="user" javaType="user">
+            <result property="u_name" column="u_name"/>
+        </association>
+    </resultMap>
+    <select id="getTotalArticle" resultType="int">
+        select count(*) from article
+    </select>
+</mapper>

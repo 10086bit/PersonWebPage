@@ -15,12 +15,24 @@ public class pageVisitController {
     private selectUserservice sus;
     @RequestMapping("login")
     public String loginPage(){
-        return "forward:/common/login.jsp";
+        return "common/login";
+    }
+
+    @RequestMapping("toEdit")
+    public String toEdit(){
+
+        return "common/editor";
     }
 
     @RequestMapping("register")
     public String registerPage(){
-        return "forward:/common/register.jsp";
+        return "common/register";
+    }
+
+
+    @RequestMapping("toAllText")
+    public String toAllText(){
+        return "common/alltext";
     }
 
     @RequestMapping("pageChange")
@@ -30,11 +42,18 @@ public class pageVisitController {
 
         return "admin/usermanage";
     }
+    @RequestMapping("articlepageChange")
+    public String articlepageChange(String pre,HttpSession session){
+        // System.out.println(pre);
+        session.setAttribute("pre",Integer.parseInt(pre));
+
+        return "common/alltext";
+    }
     @RequestMapping("toUpHead")
     public String upHead(MultipartFile file, HttpServletRequest request){
         request.setAttribute("fatt","head");
         request.setAttribute("file",file);
-        return "forward:uploadFile";
+        return "forward:uploadHeadFile";
     }
     @RequestMapping("usermanage")
     public String toUserManage(){
@@ -42,11 +61,14 @@ public class pageVisitController {
     }
     @RequestMapping("toCenter")
     public String toCenter(){
-        return "forward:/common/Center.jsp";
+        return "/common/Center";
     }
     @RequestMapping("toModUser")
     public String toModUser(int uid , HttpSession session){
+        int i=sus.retrunUserAdmin(uid);
+        session.setAttribute("isadmin",i);
         session.setAttribute("suid",uid);
+        //suid是当先查询用户的uid
         return "admin/modifyUser";
     }
 

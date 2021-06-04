@@ -7,4 +7,5 @@ public interface fileManageService {
     public boolean upDateHead(myFile myFile);
     public  int searchfid(myFile myFile);
     public  String searchfaddress(myFile myFile);
+    public int deleteHeadFile(int uid,String rootPath);
 }

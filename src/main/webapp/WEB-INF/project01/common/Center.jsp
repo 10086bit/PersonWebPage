@@ -93,6 +93,7 @@
         <input type="submit" value="Upload">
     </form>
 </div>
-
+<a href="${pageContext.request.contextPath}/toEdit">编辑文章</a>
+<a href="${pageContext.request.contextPath}/toAllText">查看所有我的</a>
 </body>
 </html>

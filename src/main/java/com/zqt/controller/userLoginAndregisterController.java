@@ -36,21 +36,21 @@ public class userLoginAndregisterController {
             //System.out.println(code+attribute);
             tips="验证码错误";
             mav.addObject("tips",tips);
-            mav.setViewName("forward:/common/register.jsp");
+            mav.setViewName("common/register");
         }else if (uies.isEmpty(user)){
             tips="该用户名已经备注过";
             mav.addObject("tips",tips);
-            mav.setViewName("forward:/common/register.jsp");
+            mav.setViewName("common/register");
         }else {
             boolean flag=ursi.userRegister(user);
             if(!flag){
                 tips="注册失败";
                 mav.addObject("tips",tips);
-                mav.setViewName("forward:/common/result.jsp");
+                mav.setViewName("common/result");
             }else {
                 tips="注册成功";
                 mav.addObject("tips",tips);
-                mav.setViewName("forward:/common/result.jsp");
+                mav.setViewName("common/result");
             }
         }
         return mav;
@@ -72,7 +72,7 @@ public class userLoginAndregisterController {
         }else {
             tips="登入失败";
             mav.addObject("tips",tips);
-            mav.setViewName("forward:/common/result.jsp");
+            mav.setViewName("common/result");
         }
         return mav;
     }

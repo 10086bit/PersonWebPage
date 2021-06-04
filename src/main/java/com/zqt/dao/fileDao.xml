@@ -15,4 +15,7 @@
     <select id="selectHeadFileByFid" parameterType="myFile" resultType="String">
         select faddress from  file where fid=#{fid}
     </select>
+    <delete id="deletefile" parameterType="int">
+        delete from file where fid=#{fid}
+    </delete>
 </mapper>
